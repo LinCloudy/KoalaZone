@@ -1,0 +1,94 @@
+1、LoginInterceptor设置为包含字符串转发，和数据库category表name命名发生冲突，主页页面跳转获取到的url包含了定义的字符串得到false，
+     导致错误重定向，无厘头的404错误，自己给自己挖坑
+	-->修改数据库category表name字段，修改top.jsp
+	-->ok
+2、使用markdown在线编辑器，写博客编辑界面一直显示缓冲，导入的插件lib包有两个组件报错	
+	-->https://pandao.github.io/editor.md/examples/index.html
+		-->chrome调试给出editormd.js获取不到css
+			document.getElementsByTagName("head")[0].appendChild(css);--404()
+		-->需要整合Editor.md
+			-->在node.js环境下，Grunt-->npm
+			-->bower install editor.md
+			-->放弃
+		-->也许有简单一点的配置方法，或者导入的插件包与项目某个jar冲突，有待解决
+	-->退一步，改用ueditor
+3、导入ueditor-jsp-utf-8版本，JSON里的注释报错（红叉）Expected value at 1:0	
+	-->https://blog.csdn.net/qq_39520065/article/details/81179847
+	-->ok
+	-->项目为utf-8编码，相同编码规则导入后，config.json却出现乱码，？？？
+	
+4、ueditor写博客，form表单提交，出现空指针
+	-->出现代码行ArticleService  56  article.getContent().length()
+	-->该行前syso：article.content 获取不到
+	-->a、content=request.getParameter("editorValue");
+	     b、request.setAttribute("content",content);
+	     c、article.setContent(content);
+	-->ok
+5、ueditor提交数据写入数据库乱码
+	-->自定义filter拦截器，替换org.springframework.web.filter.CharacterEncodingFilter
+	-->ok
+6、写博客数据写入了数据库，后台没显示出来，而且views页面布局出现问题，阅读全文没有被样式处理且不能点击
+	-->出错页面源码
+	     <div class="row">
+       		 <div class="container">
+            		 <div class="jumbotron">
+               			<h3>行路难</h3>
+                		<span class="summary"><p><span style="colo</span><br><br>--------出处
+                		<p><a class="btn btn-primary btn-lg" href="/Blog/detail/19/writePage"
+                      		role="button">阅读全文</a></p>
+            		 </div>
+       		 </div>
+    	      </div>
+
+	--><p><span style="color: rgb(15, 15, 15); font-size: 14px; font-variant-numeric: normal; font-variant-east-asian: normal; line-height: 28px;">行路难！行路难！多歧路，今安在？</span></p>
+	-->String str="<p><span style=\"colo";   str.length()=20;--20(后改为50)正好为service截取子串作为文章摘要的长度
+		-->Q1：为什么其他由网页黏贴的内容不会出现该错误？
+		     再次添加实验，发现除了summary显示不出，其他正常
+		     <div class="row">
+        			<div class="container">
+            			<div class="jumbotron">
+                			<h3>行路难</h3>
+                			<span class="summary"><p><span style="font-family: 宋体, SimSun;"><em><spa</span><br><br>
+                			<p><a class="btn btn-primary btn-lg" href="/Blog/detail/22/readPage"
+                     			 role="button">阅读全文</a></p>
+            			</div>
+        			</div>
+   		    </div>
+
+		-->Q2：<span class="summary"><p><span style="colo</span>语句为什么会导致其后的html代码失效？
+		-->总结：问题出在截取子串作为summary
+			-->第一：browser对html标签的解析处理，标签缺失，但标签内有以分号结束，只会提示unknown tag;如果标签缺失，且没有分号，no end tag直接报错
+				-->首次添加截取的子串<p><span style="colo       分号缺失
+				-->实验添加截取的子串<p><span style="font-family: 宋体, SimSun;"><em><spa    分号完整，但标签缺失
+		-->改进思路
+			-->1、截取子串加上去除html标签的方法--如果html过长，则会得到一个空串，产生空指针异常
+				-->可用过滤器
+				-->写了一个TextUtil的类，htmltotext()
+					-->出现空指针
+					-->犯2，TextUtil没有实例化就取调用htmltotext()，ok
+						-->方法不够完善，去除的不彻底，&nbsp去不掉
+				
+			-->2、取代截取子串，单独写一个添加summary的dao
+
+7、在添加文章内容较大的情况下，编辑器会把提交的button遮盖掉
+	-->修改编辑器实例的autoHeightEnabled: false
+	-->ok
+
+8、解决服务端分页和搜索分页数据重复的问题
+	-->通过一个巧妙的方法解决，没有考虑安全性或者其他问题
+
+9、解决ueditor的图片上传问题
+	--1、自定义过滤器，对图片上传请求放行
+		--ing
+	--2、GET http://localhost:8080/Blog/static/ueditor/jsp/controller.jsp?action=config&&noCache=1536807986617 404 ()
+		--ing
+	--3、考虑上传图片保存到数据库
+	     
+------------
+-->整合ssm框架，由基于配置文件换成基于Java，chrome调试发现后者页面跳转所需时间相比较短
+-->改进
+	-->1、分页--ok
+	-->2、修改后台文章列表--ok
+
+
+
