@@ -5,35 +5,33 @@
 %>
 <html>
 <head>
-    <title>请登录</title>
-    <script src="<%=contextPath%>/static/jquery-3.1.1.js"></script>
-    <script src="<%=contextPath%>/static/bootstrap/js/bootstrap.js"></script>
-    <link href="<%=contextPath%>/static/bootstrap/css/bootstrap.css" rel="stylesheet"/>
-    <link href="<%=contextPath%>/static/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
-    <link href="<%=contextPath%>/static/signin.css" rel="stylesheet"/>
+    <title>Login-page</title>
+    <script src="<%=contextPath%>/static/assets/js/jquery-1.8.2.min.js"></script>
+    <script src="<%=contextPath%>/static/assets/js/supersized.3.2.7.min.js"></script>
+    <script src="<%=contextPath%>/static/assets/js/scripts.js"></script>
+    <script src="<%=contextPath%>/static/assets/js/supersized-init.js"></script>
+    <link href="<%=contextPath%>/static/assets/css/reset.css" rel="stylesheet"/>
+    <link href="<%=contextPath%>/static/assets/css/supersized.css" rel="stylesheet"/>
+    <link href="<%=contextPath%>/static/assets/css/style.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
-	<form class="form-signin" action="/Blog/lin/dologin" method="post">
-        <h2 class="form-signin-heading">请登录</h2>
-        <c:if test="${error!=null}">
-        <div><%=request.getAttribute("error") %></div>
-        </c:if>
-        <div class="form-group">
-        <label for="inputUsername" class="sr-only">用户名</label>
-        <input type="text" id="inputUsername" name="username" value="123" class="form-control" placeholder="请输入您的用户名" required autofocus>
-        </div>
-        <div class="form-group">
-        <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" id="inputPassword"  name="password" value="123"  class="form-control" placeholder="请输入您的密码" required>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> 记住我
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-    </form> 
+    <div class="page-container">
+        <h1>Login</h1>
+        <form action="/Blog/lin/dologin" method="post">
+            <input type="text" name="username" class="username" placeholder="Username">
+            <input type="password" name="password" class="password" placeholder="Password">
+            <button type="submit">Sign in</button>
+            <div class="error"><span>+</span></div>
+        </form>
+        <%--<div class="connect">
+            <p>Or connect with:</p>
+            <p>
+                <a class="facebook" href=""></a>
+                <a class="twitter" href=""></a>
+            </p>
+        </div>--%>
+    </div>
     
 </div>
 
