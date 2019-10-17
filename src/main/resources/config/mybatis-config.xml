@@ -7,5 +7,6 @@
 	<mappers>
 		 <mapper resource="mapping/ArticleMapper.xml"/>
 		 <mapper resource="mapping/UserMapper.xml"/>
+		<mapper resource="mapping/PCDMapper.xml"/>
 	</mappers>
 </configuration>

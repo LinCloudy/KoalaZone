@@ -9,5 +9,9 @@
 		select * from user where username=#{username} and
 		password=#{password}
 	</select>
+	
+	<select id="findPCDByPid" resultType="com.lin.entity.PCD" parameterType="string">
+		select * from province_city_district where pid =:pid
+	</select>
 
 </mapper>

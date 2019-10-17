@@ -29,6 +29,12 @@ public class UserController {
 		return "admin/login";
 	}
 
+	@RequestMapping("/lin/test")
+	public String test(Model model) {
+
+		return "admin/testPCD";
+	}
+
 	@RequestMapping(value = "/lin/dologin", method = RequestMethod.POST)
 	public String doLogin(HttpServletRequest request, User user, Model model) {
 		String username = request.getParameter("username");

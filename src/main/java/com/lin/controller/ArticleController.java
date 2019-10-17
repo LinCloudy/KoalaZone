@@ -56,8 +56,8 @@ public class ArticleController {
 			markdown.transform(new StringReader(article.getContent()), out);
 			out.flush();
 			article.setContent(out.toString());
-			System.out.println("------------------");
-			System.out.println(article.getContent());
+			//System.out.println("------------------");
+			//System.out.println(article.getContent());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

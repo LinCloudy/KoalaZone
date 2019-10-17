@@ -1,62 +1,58 @@
-<%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String contextPath = request.getContextPath();
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>首页</title>
-	<link href="<%=contextPath%>/static/mycss.css" rel="stylesheet"/>
-    <script src="<%=contextPath%>/static/assets/js/jquery-1.8.2.min.js"></script>
+    <meta name="Generator" content="ECSHOP v2.7.3" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <title>提交订单</title>
 </head>
 <body>
-<%--<%@include file="comm/top.jsp" %>--%>
-<jsp:include page="comm/top.jsp"/>
-<c:forEach var="article" items="${articles}" begin="0" step="1">
-    <div class="row">
-        <div class="container">
-            <div class="jumbotron">
-                <h3>${article.title}</h3>
-                <span class="summary">${article.summary}</span><br><br>
-                <p><a class="btn btn-info btn-lg" href="/Blog/detail/${article.id}/${article.category}"
-                      role="button">阅读全文</a></p>
-            </div>
-        </div>
-    </div>
-</c:forEach>
-<table width="100%" align="center" border="0" cellpadding="5"
-       cellspacing="1" bgcolor="#dddddd">
-    <tr>
-        <td bgcolor="#ffffff" align="right" width="120px">区域信息：</td>
-        <td bgcolor="#ffffff">
-            <!-- 省 -->
-            <select id="province"name="province" onchange="changeCity()">
-                <option value="">-- 请选择省 --</option>
-            </select>&nbsp;&nbsp;&nbsp;
-            <!-- 市 -->
-            <select id="city" name="city" onchange="changeDistrict()">
-                <option value="">-- 请选择市 --</option>
-            </select>&nbsp;&nbsp;&nbsp;
-            <!-- 县(区) -->
-            <select id="district" name="district" onchange="changeDhiddenValue()">
-                <option value="">-- 请选择县(区) --</option>
-            </select>
-            <!-- 添加隐藏域，用来提交给后台省市区对应的中文名 -->
-            <input type="hidden" name="phidden" id="phidden">
-            <input type="hidden" name="chidden" id="chidden">
-            <input type="hidden" name="dhidden" id="dhidden">
-        </td>
-    </tr>
+<div class="block clearfix"><div class="AreaR">
+    <div class="block box"><div class="blank"></div>
+    </div><div class="blank"></div><div class="box"><div class="box_1">
+    <div class="userCenterBox boxCenterList clearfix" style="_height:1%;">
+        <table width="100%" align="center" border="0" cellpadding="5"
+               cellspacing="1" bgcolor="#dddddd">
+            <tr>
+                <td bgcolor="#ffffff" align="right" width="120px">区域信息：</td>
+                <td bgcolor="#ffffff">
+                    <!-- 省 -->
+                    <select id="province"name="province" onchange="changeCity()">
+                        <option value="">-- 请选择省 --</option>
+                    </select>&nbsp;&nbsp;&nbsp;
+                    <!-- 市 -->
+                    <select id="city" name="city" onchange="changeDistrict()">
+                        <option value="">-- 请选择市 --</option>
+                    </select>&nbsp;&nbsp;&nbsp;
+                    <!-- 县(区) -->
+                    <select id="district" name="district" onchange="changeDhiddenValue()">
+                        <option value="">-- 请选择县(区) --</option>
+                    </select>
+                    <!-- 添加隐藏域，用来提交给后台省市区对应的中文名 -->
+                    <input type="hidden" name="phidden" id="phidden">
+                    <input type="hidden" name="chidden" id="chidden">
+                    <input type="hidden" name="dhidden" id="dhidden">
+                </td>
+            </tr>
 
-</table>
-<jsp:include page="pagination.jsp"/>
+        </table>
+
+    </div></div></div></div></div>
+
+
 </body>
+<script src="<%=contextPath%>/static/assets/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
     $(function(){
         $.ajax({
             type:"POST",
-            url:"/Blog/lin/testPCD",
+            url:"/Blog/lin/test",
             data:{"pid":0},
             dataType:"json",
             success:function(data){
