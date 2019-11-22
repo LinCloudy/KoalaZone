@@ -1,0 +1,57 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+#box{
+    position: relative;
+    width: 300px;
+    height: 40px;
+    margin: 0 auto;
+    margin-top: 10px;
+    background-color: #e8e8e8;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+.bgColor{
+    position: absolute;
+    left:0;
+    top:0;
+    width:40px;
+    height: 40px;
+    background-color: lightblue;
+}
+
+.txt{
+    background:-webkit-gradient(linear,left top,right top,color-stop(0,#4d4d4d),color-stop(.4,#4d4d4d),color-stop(.5,#fff),color-stop(.6,#4d4d4d),color-stop(1,#4d4d4d));
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    text-align: center;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    -webkit-animation:slide-text 3s infinite;
+    -webkit-text-size-adjust:none;
+}
+@-webkit-keyframes slide-text{0%{background-position:-200px 0} 100%{background-position:200px 0}}
+.slider{
+    position: absolute;
+    left:0;
+    top:0;
+    width: 50px;
+    height: 38px;
+    border: 1px solid #ccc;
+    background: #fff;
+    text-align: center;
+    cursor: move;
+}
+.slider>i{
+    position: absolute;
+    top:50%;
+    left:50%;
+    color:#333;
+    transform: translate(-50%,-50%);
+}
+.slider.active>i{
+    color:green;
+}
