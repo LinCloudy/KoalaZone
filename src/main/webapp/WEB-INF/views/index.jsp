@@ -25,6 +25,7 @@
         </div>
     </div>
 </c:forEach>
+<div style="align-items: center">
 <table width="100%" align="center" border="0" cellpadding="5"
        cellspacing="1" bgcolor="#dddddd">
     <tr>
@@ -48,8 +49,8 @@
             <input type="hidden" name="dhidden" id="dhidden">
         </td>
     </tr>
-
 </table>
+</div>
 <jsp:include page="pagination.jsp"/>
 </body>
 <script type="text/javascript">
@@ -60,9 +61,9 @@
             data:{"pid":0},
             dataType:"json",
             success:function(data){
-                console.log(data[0]);
-                for(var i=0;i<data[0].length;i++){
-                    var $option = $("<option value='"+data[0][i].id+"'>"+data[0][i].name+"</option>");
+                console.log('success'+data);
+                for(var i=0;i<data.length;i++){
+                    var $option = $("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
                     $("#province").append($option);
                 }
             },
