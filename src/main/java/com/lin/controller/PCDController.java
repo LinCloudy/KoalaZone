@@ -23,20 +23,18 @@ public class PCDController {
     private PCDService pcdService;
 
     @RequestMapping("/lin/testPCD")
-    public String testPCD(HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public List<PCD> testPCD(HttpServletRequest request,Model model) throws IOException {
         System.out.println(request.getParameter("pid"));
         List<PCD> pcdList = pcdService.findPCDByPid(0);
         System.out.println(pcdList);
-        String json = JSON.toJSONString(pcdList);
-        System.out.println(json);
-        response.getWriter().write(json);
+        model.addAttribute("pcdList", pcdList);
        /* response.setContentType("text/xml;Charset=UTF-8");
         int pid = Integer.parseInt(request.getParameter("pid"));
         List<PCD> pcdList = pcdService.findPCDByPid(pid);
         String json = JSON.toJSONString(pcdList);
         response.getWriter().write(json);
         */
-        return "views/index";
+        return pcdList;
     }
 
 
