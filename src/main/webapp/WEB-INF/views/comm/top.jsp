@@ -6,7 +6,51 @@
 <script src="<%=contextPath%>/static/bootstrap/js/bootstrap.js"></script>
 <link href="<%=contextPath%>/static/bootstrap/css/bootstrap.css" rel="stylesheet"/>
 <link href="<%=contextPath%>/static/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
-
+<link href="//at.alicdn.com/t/font_1503607_64mwaprwpoc.css" rel="stylesheet" />
+<style>
+    .search-box {
+        position: absolute;
+        top: 2%;
+        right: 10%;
+        transform: translate(-50%, -50%);
+        background: #2f3640;
+        height: 40px;
+        border-radius: 40px;
+        padding: 10px;
+    }
+    .search-btn {
+        color: #666;
+        float: right;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #2f3640;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s;
+        text-decoration: none;
+    }
+    .search-txt {
+        border: none;
+        background: none;
+        outline: none;
+        float: left;
+        padding: 0;
+        color: white;
+        font-size: 16px;
+        transition: 0.4s;
+        line-height: 40px;
+        width: 0;
+    }
+    .search-box:hover > .search-txt {
+        width: 240px;
+        padding: 0 6px;
+    }
+    .search-box:hover > .search-btn {
+        background: white;
+    }
+</style>
 <div class="row">
 
     <nav class="navbar navbar-default">
@@ -34,12 +78,19 @@
                     <li id="jutoPage"><a href="<%=contextPath%>/column/JuTo/jutoPage">JuTo</a>
                     </li>
                 </ul>
+
                 <form class="navbar-form navbar-right">
+                    <%--<div class="search-box">
+                        <input class="search-txt" type="text" placeholder="Type to search" />
+                        <a class="search-btn" href="#">
+                            <i class="iconfont iconsearch"></i>
+                        </a>
+                    </div>--%>
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="搜索">
                         <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
+                            <button class="btn btn-default" type="button">Go!</button>
+                        </span>
                     </div>
                 </form>
             </div>
